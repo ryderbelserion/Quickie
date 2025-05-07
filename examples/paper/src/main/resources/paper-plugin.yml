@@ -1,0 +1,8 @@
+name: 'Quckie'
+main: 'com.ryderbelserion.quickie.QuickiePlugin'
+
+description: 'A quickie would not hurt'
+api-version: '1.21.4'
+version: '1.0.0'
+
+folia-supported: true
