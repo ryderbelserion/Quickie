@@ -3,6 +3,7 @@ package com.ryderbelserion.quckie;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.ryderbelserion.quckie.enums.Mode;
 import com.ryderbelserion.quckie.objects.Command;
+import com.ryderbelserion.quckie.objects.context.PaperCommandContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class PaperCommandManager extends CommandManager<CommandSourceStack, PermissionDefault> {
 
-    private final List<Command<CommandSourceStack>> commands = new ArrayList<>();
+    private final List<Command<CommandSourceStack, PaperCommandContext>> commands = new ArrayList<>();
 
     private final Plugin plugin;
     private final PluginManager pluginManager;

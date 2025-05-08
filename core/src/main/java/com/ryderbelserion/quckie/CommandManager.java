@@ -14,4 +14,7 @@ public abstract class CommandManager<S, D> {
 
     public abstract void enable(final LiteralCommandNode<S> root, final List<LiteralCommandNode<S>> children);
 
+    public void disable() {
+
+    }
 }

@@ -1,8 +1,9 @@
 package com.ryderbelserion.quckie.objects;
 
-import net.minecraft.commands.CommandSourceStack;
+import com.ryderbelserion.quckie.objects.context.PaperCommandContext;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
 
-public abstract class PaperCommand extends Command<CommandSourceStack> {
+public abstract class PaperCommand extends Command<CommandSourceStack, PaperCommandContext> {
 
 
 }
