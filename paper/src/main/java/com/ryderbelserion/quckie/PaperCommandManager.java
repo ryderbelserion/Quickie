@@ -124,7 +124,7 @@ public class PaperCommandManager extends CommandManager<CommandSourceStack, Perm
      */
     @ApiStatus.Internal
     @ApiStatus.Experimental()
-    public final AnnotationManager getAnnotationManager() {
+    private AnnotationManager getAnnotationManager() {
         return this.annotationManager;
     }
 }
