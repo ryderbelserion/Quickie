@@ -44,10 +44,10 @@ public class TestCommand extends Command<CommandSourceStack> {
     }
 
     @Override
-    public Command<CommandSourceStack> build() {
+    public LiteralCommandNode<CommandSourceStack> build() {
         this.manager.registerPermissions(PermissionDefault.OP, permissions());
 
-        return this;
+        return literal().createBuilder().build();
     }
 
     @Override

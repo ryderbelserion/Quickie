@@ -11,7 +11,7 @@ public abstract class Command<Sender> {
 
     public abstract LiteralCommandNode<Sender> literal();
 
-    public abstract Command<Sender> build();
+    public abstract LiteralCommandNode<Sender> build();
 
     public abstract Command<Sender> delete();
 
