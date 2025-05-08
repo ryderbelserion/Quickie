@@ -1,6 +1,7 @@
 package com.ryderbelserion.quckie;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import com.ryderbelserion.quckie.annotations.AnnotationManager;
 import com.ryderbelserion.quckie.enums.Mode;
 import com.ryderbelserion.quckie.objects.Command;
 import com.ryderbelserion.quckie.objects.context.PaperCommandContext;
@@ -15,6 +16,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,8 @@ public class PaperCommandManager extends CommandManager<CommandSourceStack, Perm
     private final PluginManager pluginManager;
     private final LifecycleEventManager<@NotNull Plugin> lifecycle;
 
+    private final AnnotationManager annotationManager;
+
     public PaperCommandManager(final Plugin plugin) {
         this.plugin = plugin;
 
@@ -37,6 +41,8 @@ public class PaperCommandManager extends CommandManager<CommandSourceStack, Perm
         this.pluginManager = server.getPluginManager();
 
         this.lifecycle = this.plugin.getLifecycleManager();
+
+        this.annotationManager = new AnnotationManager(this.plugin);
     }
 
     @Override
@@ -111,5 +117,14 @@ public class PaperCommandManager extends CommandManager<CommandSourceStack, Perm
 
             registry.register(root);
         });
+    }
+
+    /**
+     * DO NOT USE
+     */
+    @ApiStatus.Internal
+    @ApiStatus.Experimental()
+    public final AnnotationManager getAnnotationManager() {
+        return this.annotationManager;
     }
 }
