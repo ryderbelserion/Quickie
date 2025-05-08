@@ -9,6 +9,9 @@ import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +98,19 @@ public class AnnotationManager {
 
             //this.logger.warn(this.miniMessage.deserialize("<yellow>Method Command: {}, <light_purple>Class Path: {}"), name, method.getDeclaringClass().getSimpleName());
 
-            final LiteralCommandNode<CommandSourceStack> node = Commands.literal(name).build();
+            final LiteralCommandNode<CommandSourceStack> node = Commands.literal(name).executes(context -> {
+                try {
+                    final Constructor<?> declared = method.getDeclaringClass().getDeclaredConstructor();
+
+                    declared.setAccessible(true);
+
+                    method.invoke(declared.newInstance());
+                } catch (IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
+
+                return com.mojang.brigadier.Command.SINGLE_SUCCESS;
+            }).build();
 
             nodes.add(node);
         }
